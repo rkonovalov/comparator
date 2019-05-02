@@ -14,7 +14,7 @@ import java.util.function.Predicate;
  * @param <T> value of object
  */
 @SuppressWarnings("WeakerAccess")
-public class Comparator<T> {
+public class Comparator<T, K> {
     private List<ComparatorItem> items;
     private T value;
 
@@ -27,10 +27,25 @@ public class Comparator<T> {
      * Returns an {@code Comparator} with the specified present nullable value.
      *
      * @param value value of nullable object
-     * @param <T>   type of the object
+     * @param <T>   Comparable object
      * @return an {@code Comparator} with the value present
      */
-    public static <T> Comparator<T> of(T value) {
+    public static <T, K> Comparator<T, K> of(T value) {
+        return new Comparator<>(value);
+    }
+
+    /**
+     * Returns an {@code Comparator} with the specified present nullable value.
+     *
+     * @param value value of nullable object
+     * @param returnObjectClass class of object which will be returned in {@code get()} method
+     * @param <T> Comparable object
+     * @param <U> type of object
+     * @return an {@code Comparator} with the value present
+     */
+    public static <T, U> Comparator<T, U> of(T value, Class<U> returnObjectClass) {
+        if (returnObjectClass == null)
+            throw new NoSuchElementException("returnObjectClass couldn't be null");
         return new Comparator<>(value);
     }
 
@@ -39,12 +54,11 @@ public class Comparator<T> {
      *
      * @param predicate   a predicate to apply to the value, if present
      * @param resultValue a mapping function to apply to the value, if present
-     * @param <U>         The type of the result of the mapping function
      * @return an {@code Comparator} with the value present
      * @throws NoSuchElementException if predicate or mapping function is null
      */
     @SuppressWarnings("unchecked")
-    public <U> Comparator<T> match(Predicate<? super T> predicate, Function<? super T, ? extends U> resultValue) {
+    public Comparator<T, K> match(Predicate<? super T> predicate, Function<T, K> resultValue) {
 
         if (predicate == null) {
             throw new NoSuchElementException("No predicate present");
@@ -59,14 +73,14 @@ public class Comparator<T> {
      * Adds {@code expectedValue} and return function in items list
      *
      * @param expectedValue expected value of object
-     * @param resultValue a mapping function to apply to the value, if present
-     * @param <U> The type of the result of the mapping function
+     * @param resultValue   a mapping function to apply to the value, if present
+     * @param <U>           The type of the result of the mapping function
      * @return an {@code Comparator} with the value present
      * @throws NoSuchElementException if mapping function is null
      */
     @SuppressWarnings("unchecked")
-    public <U> Comparator<T> match(Object expectedValue, Function<? super T, ? extends U> resultValue) {
-         if (resultValue == null)
+    public <U> Comparator<T, K> match(Object expectedValue, Function<? super T, ? extends U> resultValue) {
+        if (resultValue == null)
             throw new NoSuchElementException("No mapping function present");
 
         items.add(new ComparatorItem(value, (s -> s.equals(expectedValue)), resultValue));
@@ -77,11 +91,11 @@ public class Comparator<T> {
      * Adds {@code expectedValue} and return function in items list
      *
      * @param expectedValue expected value of object
-     * @param resultObject result value of object
+     * @param resultObject  result value of object
      * @return an {@code Comparator} with the value present
      */
     @SuppressWarnings("unchecked")
-    public Comparator<T> match(Object expectedValue, Object resultObject) {
+    public Comparator<T, K> match(Object expectedValue, Object resultObject) {
         items.add(new ComparatorItem(value, (s -> s.equals(expectedValue)), (s -> resultObject)));
         return this;
     }
@@ -119,13 +133,14 @@ public class Comparator<T> {
      * <p>If method couldn't to find not null object, it returns {@code value} object
      *
      * @param value not-null object which will be returned by default
-     * @return {@link Object}
+     * @return object instance of U type
      */
-    public Object orElse(Object value) {
+    @SuppressWarnings("unchecked")
+    public <U> U orElse(Object value) {
         if (value == null) {
             throw new NoSuchElementException("No value present");
         }
-        return get(value);
+        return (U) get(value);
     }
 
     /**
@@ -133,9 +148,10 @@ public class Comparator<T> {
      *
      * <p>If method couldn't to find not null object, it returns null value
      *
-     * @return {@link Object}
+     * @return object instance of U type
      */
-    public Object get() {
-        return get(null);
+    @SuppressWarnings("unchecked")
+    public <U> U get() {
+        return (U) get(null);
     }
 }
