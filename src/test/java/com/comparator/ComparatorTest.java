@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class ComparatorTest {
     private static final String ATTRIBUTE_TEST1 = "TEST1";
@@ -15,6 +16,10 @@ public class ComparatorTest {
     private static final String RESULT_2 = "result_2";
 
     private Map<String, String> items;
+
+    private String addSuffix(String value) {
+        return value + " OK";
+    }
 
     @Before
     public void init() {
@@ -123,7 +128,30 @@ public class ComparatorTest {
         Assert.assertEquals("Found result 1", result);
     }
 
-    private String addSuffix(String value) {
-        return value + " OK";
+    @Test(expected = NoSuchElementException.class)
+    public void testOfNullReturnObject() {
+        Comparator comparator = Comparator.of(items.get(ATTRIBUTE_TEST1), null);
+
+        Assert.assertNotNull(comparator);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testMatchNullReturnObject() {
+        String result = Comparator.of(items.get(ATTRIBUTE_TEST1))
+                .match(RESULT_1, null)
+                .match(RESULT_2, "Found result 2")
+                .get();
+
+        Assert.assertEquals("Found result 1", result);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testOrElseNullReturnObject() {
+        String result = Comparator.of(items.get(ATTRIBUTE_TEST1))
+                .match(RESULT_1, "Found result 1")
+                .match(RESULT_2, "Found result 2")
+                .orElse(null);
+
+        Assert.assertEquals("Found result 1", result);
     }
 }
