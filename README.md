@@ -146,6 +146,7 @@ Because next code will return value type of int, not of String
     .match((s -> s.startsWith("st")), (s -> "Found st prefix in string".length()))
     ...
 ```
+# Release notes
 
 ## Version 1.0.0
     * Initial release
