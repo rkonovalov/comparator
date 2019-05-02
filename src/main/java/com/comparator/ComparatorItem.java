@@ -8,6 +8,7 @@ import java.util.function.Predicate;
  * @param <T> type of the object
  * @param <U> The type of the result of the mapping function
  */
+@SuppressWarnings("WeakerAccess")
 public class ComparatorItem<T, U> {
     private T value;
     private Predicate<T> predicate;

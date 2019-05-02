@@ -13,6 +13,7 @@ import java.util.function.Predicate;
  *
  * @param <T> value of object
  */
+@SuppressWarnings("WeakerAccess")
 public class Comparator<T> {
     private List<ComparatorItem> items;
     private T value;
