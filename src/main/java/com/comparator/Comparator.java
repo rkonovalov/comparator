@@ -28,6 +28,7 @@ public class Comparator<T, K> {
      *
      * @param value value of nullable object
      * @param <T>   Comparable object
+     * @param <K>   Returnable object class
      * @return an {@code Comparator} with the value present
      */
     public static <T, K> Comparator<T, K> of(T value) {
@@ -37,10 +38,10 @@ public class Comparator<T, K> {
     /**
      * Returns an {@code Comparator} with the specified present nullable value.
      *
-     * @param value value of nullable object
+     * @param value             value of nullable object
      * @param returnObjectClass class of object which will be returned in {@code get()} method
-     * @param <T> Comparable object
-     * @param <U> type of object
+     * @param <T>               Comparable object
+     * @param <U>               type of object
      * @return an {@code Comparator} with the value present
      */
     public static <T, U> Comparator<T, U> of(T value, Class<U> returnObjectClass) {
@@ -132,6 +133,7 @@ public class Comparator<T, K> {
      *
      * <p>If method couldn't to find not null object, it returns {@code value} object
      *
+     * @param <U>   The type of the result of the mapping function
      * @param value not-null object which will be returned by default
      * @return object instance of U type
      */
@@ -148,6 +150,7 @@ public class Comparator<T, K> {
      *
      * <p>If method couldn't to find not null object, it returns null value
      *
+     * @param <U> The type of the result of the mapping function
      * @return object instance of U type
      */
     @SuppressWarnings("unchecked")
