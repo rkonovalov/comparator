@@ -55,6 +55,15 @@ public class Comparator<T> {
         return this;
     }
 
+    /**
+     * Adds {@code expectedValue} and return function in items list
+     *
+     * @param expectedValue expected value of object
+     * @param resultValue a mapping function to apply to the value, if present
+     * @param <U> The type of the result of the mapping function
+     * @return an {@code Comparator} with the value present
+     * @throws NoSuchElementException if mapping function is null
+     */
     @SuppressWarnings("unchecked")
     public <U> Comparator<T> match(Object expectedValue, Function<? super T, ? extends U> resultValue) {
          if (resultValue == null)
@@ -64,6 +73,13 @@ public class Comparator<T> {
         return this;
     }
 
+    /**
+     * Adds {@code expectedValue} and return function in items list
+     *
+     * @param expectedValue expected value of object
+     * @param resultObject result value of object
+     * @return an {@code Comparator} with the value present
+     */
     @SuppressWarnings("unchecked")
     public Comparator<T> match(Object expectedValue, Object resultObject) {
         items.add(new ComparatorItem(value, (s -> s.equals(expectedValue)), (s -> resultObject)));
