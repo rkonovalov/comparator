@@ -66,7 +66,7 @@ If we try to test some complex types we forced to use "if...else" statements
 
 Comparator can to solve this type of issues. Let's look closer how it works.
 
-# Installation
+## Installation
 For using Comparator you need to import dependency
 
 ```xml
@@ -77,7 +77,7 @@ For using Comparator you need to import dependency
 </dependency>
 ```
 
-# Examples o usage
+## Examples o usage
 Comparator uses Java 8 lambda expressions and Optional container. And if you ever had experience with using it, it will be useful.
 
 ## Simple testing
