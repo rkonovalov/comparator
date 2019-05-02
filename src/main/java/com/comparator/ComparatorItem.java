@@ -10,8 +10,8 @@ import java.util.function.Predicate;
  */
 public class ComparatorItem<T, U> {
     private T value;
-    private Predicate<? super T> predicate;
-    private Function<? super T, ? extends U> mapper;
+    private Predicate<T> predicate;
+    private Function<T, U> mapper;
 
     /**
      * Constructor
@@ -20,7 +20,7 @@ public class ComparatorItem<T, U> {
      * @param predicate a predicate to apply to the value, if present
      * @param mapper a mapping function to apply to the value, if present
      */
-    public ComparatorItem(T value, Predicate<? super T> predicate, Function<? super T, ? extends U> mapper) {
+    public ComparatorItem(T value, Predicate<T> predicate, Function<T, U> mapper) {
         this.value = value;
         this.predicate = predicate;
         this.mapper = mapper;
@@ -41,7 +41,7 @@ public class ComparatorItem<T, U> {
      * @return a predicate that represents the logical negation of this
      * predicate
      */
-    public Predicate<? super T> getPredicate() {
+    public Predicate<T> getPredicate() {
         return predicate;
     }
 
@@ -50,7 +50,7 @@ public class ComparatorItem<T, U> {
      *
      * @return a mapping function to apply to the value, if present
      */
-    public Function<? super T, ? extends U> getMapper() {
+    public Function<T, U> getMapper() {
         return mapper;
     }
 }

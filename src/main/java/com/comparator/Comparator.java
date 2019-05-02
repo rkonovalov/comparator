@@ -64,7 +64,7 @@ public class Comparator<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public <U> Comparator<T> match(Object expectedValue, Object resultObject) {
+    public Comparator<T> match(Object expectedValue, Object resultObject) {
         items.add(new ComparatorItem(value, (s -> s.equals(expectedValue)), (s -> resultObject)));
         return this;
     }
