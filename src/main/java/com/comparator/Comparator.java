@@ -138,7 +138,7 @@ public class Comparator<T, K> {
      * @return object instance of U type
      */
     @SuppressWarnings("unchecked")
-    public <U> U orElse(Object value) {
+    public <U> U orElse(U value) {
         if (value == null) {
             throw new NoSuchElementException("No value present");
         }
