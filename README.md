@@ -73,7 +73,7 @@ For using Comparator you need to import dependency
 <dependency>
     <groupId>com.github.rkonovalov</groupId>
     <artifactId>comparator</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 If you are using another build automation tool, you can find configuration string by this URL:
@@ -148,7 +148,10 @@ Because next code will return value type of int, not of String
     .compare((s -> s.startsWith("st")), (s -> "Found st prefix in string".length()))
     ...
 ```
-## Release notes
+# Release notes
 
-### Version 1.0.0
+## Version 1.0.1
+    * Refactored methods
+    
+## Version 1.0.0
     * Initial release
