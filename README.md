@@ -82,13 +82,13 @@ https://search.maven.org/artifact/com.github.rkonovalov/comparator/1.0.0/jar
 ## Examples o usage
 Comparator uses Java 8 lambda expressions and Optional container. And if you ever had experience with using it, it will be useful.
 
-## Simple testing
+## Simple comparing
 If you need just test object for equality you can use next code
 ```java
     String strValue = "test";
     String result = Comparator.of(strValue)
-        .match("test", "Found result 1")
-        .match("test2", "Found result 2")
+        .compare("test", "Found result 1")
+        .compare("test2", "Found result 2")
         .get();
     
     //result value will be equal to "Found result 1" string
@@ -100,8 +100,8 @@ In case of Comparator didn't find equality of object value, it can return defaul
 ```java
     String strValue = null;
     String result = Comparator.of(strValue)
-        .match("test", "Found result 1")
-        .match("test2", "Found result 2")
+        .compare("test", "Found result 1")
+        .compare("test2", "Found result 2")
         .orElse("Not found");
     
     //result value will be equal to "Not found" string
@@ -109,13 +109,13 @@ In case of Comparator didn't find equality of object value, it can return defaul
 
 ## Complex comparing
 How about testing more than one object value? 
-Comparator allows you using Java 8 predicates and mapper functions.
+Comparator allows you using Java 8 predicates and resultExpression functions.
 
 ```java
    String strValue = "test";
    String result = Comparator.of(strValue)
-       .match((s -> s.length() == 4), (s -> "Length of string 4 char"))
-       .match((s -> s.startsWith("st")), (s -> "Found st prefix in string"))
+       .compare((s -> s.length() == 4), (s -> "Length of string 4 char"))
+       .compare((s -> s.startsWith("st")), (s -> "Found st prefix in string"))
        .get();
    
    //result value will be equal to "Length of string 4 char" string
@@ -125,8 +125,8 @@ If you need to control return values in mapping functions you can use next examp
 ```java
    String strValue = "test";
    String result = Comparator.of(strValue, String.class)
-       .match((s -> s.length() == 4), (s -> "Length of string 4 char"))
-       .match((s -> s.startsWith("st")), (s -> "Found st prefix in string"))
+       .compare((s -> s.length() == 4), (s -> "Length of string 4 char"))
+       .compare((s -> s.startsWith("st")), (s -> "Found st prefix in string"))
        .get();
    
    //result value will be equal to "Length of string 4 char" string
@@ -136,8 +136,8 @@ Next code will not be compiled by compiler
 ```java
    String strValue = "test";
    String result = Comparator.of(strValue, String.class)
-       .match((s -> s.length() == 4), (s -> "Length of string 4 char"))
-       .match((s -> s.startsWith("st")), (s -> "Found st prefix in string".length()))
+       .compare((s -> s.length() == 4), (s -> "Length of string 4 char"))
+       .compare((s -> s.startsWith("st")), (s -> "Found st prefix in string".length()))
        .get();
    
    //result value will be equal to "Length of string 4 char" string
@@ -145,7 +145,7 @@ Next code will not be compiled by compiler
 Because next code will return value type of int, not of String
 ```java
     ...
-    .match((s -> s.startsWith("st")), (s -> "Found st prefix in string".length()))
+    .compare((s -> s.startsWith("st")), (s -> "Found st prefix in string".length()))
     ...
 ```
 ## Release notes
