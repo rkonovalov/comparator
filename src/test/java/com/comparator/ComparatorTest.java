@@ -31,7 +31,7 @@ public class ComparatorTest {
     public void testComparatorFirst() {
 
         String result = Comparator.of(items)
-                .match((s -> s.containsKey(ATTRIBUTE_TEST1)), (s -> s.get(ATTRIBUTE_TEST1)))
+                .compare((s -> s.containsKey(ATTRIBUTE_TEST1)), (s -> s.get(ATTRIBUTE_TEST1)))
                 .get();
 
         Assert.assertEquals(RESULT_1, result);
@@ -41,7 +41,7 @@ public class ComparatorTest {
     public void testComparatorSecond() {
 
         String result = Comparator.of(items)
-                .match((s -> s.containsKey(ATTRIBUTE_TEST2)), (s -> s.get(ATTRIBUTE_TEST2)))
+                .compare((s -> s.containsKey(ATTRIBUTE_TEST2)), (s -> s.get(ATTRIBUTE_TEST2)))
                 .get();
 
         Assert.assertEquals(RESULT_2, result);
@@ -51,8 +51,8 @@ public class ComparatorTest {
     public void testComparatorFirstMultiple() {
 
         String result = Comparator.of(items, String.class)
-                .match((s -> s.containsKey(ATTRIBUTE_UNKNOWN)), (s -> s.get(ATTRIBUTE_UNKNOWN)))
-                .match((s -> s.containsKey(ATTRIBUTE_TEST2)), (s -> s.get(ATTRIBUTE_TEST2)))
+                .compare((s -> s.containsKey(ATTRIBUTE_UNKNOWN)), (s -> s.get(ATTRIBUTE_UNKNOWN)))
+                .compare((s -> s.containsKey(ATTRIBUTE_TEST2)), (s -> s.get(ATTRIBUTE_TEST2)))
                 .get();
 
         Assert.assertEquals(RESULT_2, result);
@@ -63,7 +63,7 @@ public class ComparatorTest {
 
 
         String result = Comparator.of(items)
-                .match((s -> s.containsKey(ATTRIBUTE_UNKNOWN)), (s -> s.get(ATTRIBUTE_UNKNOWN)))
+                .compare((s -> s.containsKey(ATTRIBUTE_UNKNOWN)), (s -> s.get(ATTRIBUTE_UNKNOWN)))
                 .get();
 
         Assert.assertNull(result);
@@ -72,7 +72,7 @@ public class ComparatorTest {
     @Test
     public void testComparatorDefaultOnNull() {
         Object result = Comparator.of(items)
-                .match((s -> s.containsKey(ATTRIBUTE_UNKNOWN)), (s -> s.get(ATTRIBUTE_UNKNOWN)))
+                .compare((s -> s.containsKey(ATTRIBUTE_UNKNOWN)), (s -> s.get(ATTRIBUTE_UNKNOWN)))
                 .orElse(DEFAULT);
 
         Assert.assertEquals(DEFAULT, result);
@@ -82,7 +82,7 @@ public class ComparatorTest {
     public void testComparatorNull() {
         Map<String, String> nullItems = null;
         String result = Comparator.of(nullItems)
-                .match((s -> s.containsKey(ATTRIBUTE_TEST1)), (s -> s.get(ATTRIBUTE_TEST1)))
+                .compare((s -> s.containsKey(ATTRIBUTE_TEST1)), (s -> s.get(ATTRIBUTE_TEST1)))
                 .orElse(DEFAULT);
 
         Assert.assertEquals(DEFAULT, result);
@@ -91,7 +91,7 @@ public class ComparatorTest {
     @Test(expected = NoSuchElementException.class)
     public void testComparatorNullPredicate() {
         String result = Comparator.of(items)
-                .match(null, (s -> s.get(ATTRIBUTE_TEST1)))
+                .compare(null, (s -> s.get(ATTRIBUTE_TEST1)))
                 .orElse(DEFAULT);
         Assert.assertEquals(DEFAULT, result);
     }
@@ -99,7 +99,7 @@ public class ComparatorTest {
     @Test(expected = NoSuchElementException.class)
     public void testComparatorNullMapper() {
         String result = Comparator.of(items)
-                .match((s -> s.containsKey(ATTRIBUTE_TEST1)), null)
+                .compare((s -> s.containsKey(ATTRIBUTE_TEST1)), null)
                 .orElse(DEFAULT);
 
         Assert.assertEquals(DEFAULT, result);
@@ -109,8 +109,8 @@ public class ComparatorTest {
     public void testComparatorComparingObjectValue() {
 
         String result = Comparator.of(items.get(ATTRIBUTE_TEST1))
-                .match(RESULT_1, (s -> addSuffix("Found result 1")))
-                .match(RESULT_2, (s -> addSuffix("Found result 2")))
+                .compare(RESULT_1, (s -> addSuffix("Found result 1")))
+                .compare(RESULT_2, (s -> addSuffix("Found result 2")))
                 .get();
 
         Assert.assertEquals("Found result 1 OK", result);
@@ -120,8 +120,8 @@ public class ComparatorTest {
     public void testComparatorComparingObject() {
 
         String result = Comparator.of(items.get(ATTRIBUTE_TEST1))
-                .match(RESULT_1, "Found result 1")
-                .match(RESULT_2, "Found result 2")
+                .compare(RESULT_1, "Found result 1")
+                .compare(RESULT_2, "Found result 2")
                 .get();
 
         Assert.assertEquals("Found result 1", result);
@@ -137,8 +137,8 @@ public class ComparatorTest {
     @Test(expected = NoSuchElementException.class)
     public void testMatchNullReturnObject() {
         String result = Comparator.of(items.get(ATTRIBUTE_TEST1))
-                .match(RESULT_1, null)
-                .match(RESULT_2, "Found result 2")
+                .compare(RESULT_1, null)
+                .compare(RESULT_2, "Found result 2")
                 .get();
 
         Assert.assertEquals("Found result 1", result);
@@ -147,8 +147,8 @@ public class ComparatorTest {
     @Test(expected = NoSuchElementException.class)
     public void testOrElseNullReturnObject() {
         String result = Comparator.of(items.get(ATTRIBUTE_TEST1))
-                .match(RESULT_1, "Found result 1")
-                .match(RESULT_2, "Found result 2")
+                .compare(RESULT_1, "Found result 1")
+                .compare(RESULT_2, "Found result 2")
                 .orElse(null);
 
         Assert.assertEquals("Found result 1", result);

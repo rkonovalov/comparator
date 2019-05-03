@@ -59,7 +59,7 @@ public class Comparator<T, K> {
      * @throws NoSuchElementException if condition or mapping function is null
      */
     @SuppressWarnings("unchecked")
-    public Comparator<T, K> match(Predicate<? super T> condition, Function<T, K> resultValue) {
+    public Comparator<T, K> compare(Predicate<? super T> condition, Function<T, K> resultValue) {
 
         if (condition == null) {
             throw new NoSuchElementException("No condition present");
@@ -80,7 +80,7 @@ public class Comparator<T, K> {
      * @throws NoSuchElementException if mapping function is null
      */
     @SuppressWarnings("unchecked")
-    public <U> Comparator<T, K> match(Object expectedValue, Function<? super T, ? extends U> resultValue) {
+    public <U> Comparator<T, K> compare(Object expectedValue, Function<? super T, ? extends U> resultValue) {
         if (resultValue == null)
             throw new NoSuchElementException("No mapping function present");
 
@@ -96,7 +96,7 @@ public class Comparator<T, K> {
      * @return an {@code Comparator} with the value present
      */
     @SuppressWarnings("unchecked")
-    public Comparator<T, K> match(Object expectedValue, Object resultObject) {
+    public Comparator<T, K> compare(Object expectedValue, Object resultObject) {
         items.add(new ComparatorItem(value, (s -> s.equals(expectedValue)), (s -> resultObject)));
         return this;
     }
