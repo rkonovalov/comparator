@@ -51,22 +51,22 @@ public class Comparator<T, K> {
     }
 
     /**
-     * Adds predicate and return function in items list
+     * Adds condition and return function in items list
      *
-     * @param predicate   a predicate to apply to the value, if present
+     * @param condition   a condition to apply to the value, if present
      * @param resultValue a mapping function to apply to the value, if present
      * @return an {@code Comparator} with the value present
-     * @throws NoSuchElementException if predicate or mapping function is null
+     * @throws NoSuchElementException if condition or mapping function is null
      */
     @SuppressWarnings("unchecked")
-    public Comparator<T, K> match(Predicate<? super T> predicate, Function<T, K> resultValue) {
+    public Comparator<T, K> match(Predicate<? super T> condition, Function<T, K> resultValue) {
 
-        if (predicate == null) {
-            throw new NoSuchElementException("No predicate present");
+        if (condition == null) {
+            throw new NoSuchElementException("No condition present");
         } else if (resultValue == null)
             throw new NoSuchElementException("No mapping function present");
 
-        items.add(new ComparatorItem(value, predicate, resultValue));
+        items.add(new ComparatorItem(value, condition, resultValue));
         return this;
     }
 
@@ -105,7 +105,7 @@ public class Comparator<T, K> {
      * Gets object from all stored in list mapping functions
      *
      * <p>This method loops through the list, pickup each item {@link ComparatorItem}.
-     * If predicate in item is apply to the value then method get object from mapping function.
+     * If condition in item is apply to the value then method get object from mapping function.
      * If object in mapping function isn't null then method returns this object.
      * Otherwise method continues to loop list items.
      * If all items is looped and object value is null, method returns {@code defaultValue}
@@ -119,7 +119,7 @@ public class Comparator<T, K> {
         for (ComparatorItem item : items) {
             Optional<T> optional = (Optional<T>) Optional.ofNullable(item.getValue());
 
-            Object obj = optional.filter(item.getPredicate())
+            Object obj = optional.filter(item.getCondition())
                     .map(item.getMapper())
                     .orElse(null);
             if (obj != null)

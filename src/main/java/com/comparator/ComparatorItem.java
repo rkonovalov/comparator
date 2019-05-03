@@ -11,19 +11,19 @@ import java.util.function.Predicate;
 @SuppressWarnings("WeakerAccess")
 public class ComparatorItem<T, U> {
     private T value;
-    private Predicate<T> predicate;
+    private Predicate<T> condition;
     private Function<T, U> mapper;
 
     /**
      * Constructor
      *
      * @param value value of object
-     * @param predicate a predicate to apply to the value, if present
+     * @param condition a condition to apply to the value, if present
      * @param mapper a mapping function to apply to the value, if present
      */
-    public ComparatorItem(T value, Predicate<T> predicate, Function<T, U> mapper) {
+    public ComparatorItem(T value, Predicate<T> condition, Function<T, U> mapper) {
         this.value = value;
-        this.predicate = predicate;
+        this.condition = condition;
         this.mapper = mapper;
     }
 
@@ -37,13 +37,13 @@ public class ComparatorItem<T, U> {
     }
 
     /**
-     * Returns predicate
+     * Returns condition
      *
-     * @return a predicate that represents the logical negation of this
-     * predicate
+     * @return a condition that represents the logical negation of this
+     * condition
      */
-    public Predicate<T> getPredicate() {
-        return predicate;
+    public Predicate<T> getCondition() {
+        return condition;
     }
 
     /**
