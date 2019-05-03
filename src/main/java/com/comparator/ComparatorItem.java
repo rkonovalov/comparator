@@ -12,19 +12,19 @@ import java.util.function.Predicate;
 public class ComparatorItem<T, U> {
     private T value;
     private Predicate<T> condition;
-    private Function<T, U> mapper;
+    private Function<T, U> resultExpression;
 
     /**
      * Constructor
      *
      * @param value value of object
      * @param condition a condition to apply to the value, if present
-     * @param mapper a mapping function to apply to the value, if present
+     * @param resultExpression a mapping function to apply to the value, if condition is present
      */
-    public ComparatorItem(T value, Predicate<T> condition, Function<T, U> mapper) {
+    public ComparatorItem(T value, Predicate<T> condition, Function<T, U> resultExpression) {
         this.value = value;
         this.condition = condition;
-        this.mapper = mapper;
+        this.resultExpression = resultExpression;
     }
 
     /**
@@ -47,11 +47,11 @@ public class ComparatorItem<T, U> {
     }
 
     /**
-     * Returns mapper function
+     * Returns resultExpression function
      *
      * @return a mapping function to apply to the value, if present
      */
-    public Function<T, U> getMapper() {
-        return mapper;
+    public Function<T, U> getResultExpression() {
+        return resultExpression;
     }
 }
