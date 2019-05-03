@@ -76,6 +76,8 @@ For using Comparator you need to import dependency
     <version>1.0.0</version>
 </dependency>
 ```
+If you are using another build automation tool, you can find configuration string by this URL:
+https://search.maven.org/artifact/com.github.rkonovalov/comparator/1.0.0/jar
 
 ## Examples o usage
 Comparator uses Java 8 lambda expressions and Optional container. And if you ever had experience with using it, it will be useful.
