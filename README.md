@@ -61,8 +61,8 @@ Of course you can use **switch** statement like in next example:
     }
     ...
 ```
-But **switch** statement has restrictions. It accepts only types: char, byte, short, int, Character, Byte, Short, Integer, String or an enum
-If we try to test some complex types we forced to use "if...else" statements
+But **switch** statement has restrictions. It accepts only types: **char, byte, short, int, Character, Byte, Short, Integer, String or an enum**.
+If we try to compare some complex types we forced to use "if...else" statements
 
 Comparator can to solve this type of issues. Let's look closer how it works.
 
