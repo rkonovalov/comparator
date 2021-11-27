@@ -71,9 +71,9 @@ For using Comparator you need to import dependency
 
 ```xml
 <dependency>
-    <groupId>com.github.rkonovalov</groupId>
+    <groupId>io.github.rkonovalov</groupId>
     <artifactId>comparator</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 If you are using another build automation tool, you can find configuration string by this URL:
