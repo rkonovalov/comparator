@@ -27,6 +27,17 @@ public class BatchQueueListTest {
         }
     }
 
+    @Test
+    public void testDefaultConstructor() {
+        batchQueueList = new BatchQueueList<>();
+        insertMocInitialBatches(batchQueueList);
+
+        List<Integer> resultList = batchQueueList.stream().sorted().collect(Collectors.toList());
+
+        Assert.assertEquals(25000, resultList.size());
+        Assert.assertEquals(63012500, resultList.stream().mapToLong(i -> i).sum());
+        Assert.assertEquals(118108229, resultList.hashCode());
+    }
 
     @Test
     public void testAscItemSelection() {
@@ -273,6 +284,33 @@ public class BatchQueueListTest {
         Assert.assertTrue(batchQueueList.clearComplete());
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testRemoveIf() {
+        batchQueueList = new BatchQueueList<>();
+        batchQueueList.removeIf(null);
+    }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testOffer() {
+        batchQueueList = new BatchQueueList<>();
+        batchQueueList.offer(null);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testPeek() {
+        batchQueueList = new BatchQueueList<>();
+        batchQueueList.peek();
+    }
+
+    @Test
+    public void testPoll() {
+        batchQueueList = new BatchQueueList<>();
+        insertMocInitialBatches(batchQueueList);
+
+        Integer value = batchQueueList.poll();
+
+        Assert.assertNotNull(value);
+        Assert.assertEquals(1, value.intValue());
+    }
 
 }
