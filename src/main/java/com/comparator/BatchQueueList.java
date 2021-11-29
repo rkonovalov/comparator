@@ -27,7 +27,7 @@ public class BatchQueueList<T> extends AbstractQueue<T> implements BatchQueue<T>
     }
 
     @Override
-    public void add(List<T> items) {
+    public synchronized void add(List<T> items) {
         queueLock.lock();
         try {
             if (batchQueueItemSelectionBehaviour == BatchQueueItemSelectionBehaviour.ITEM_SELECT_RANDOM)
@@ -46,7 +46,7 @@ public class BatchQueueList<T> extends AbstractQueue<T> implements BatchQueue<T>
         }
     }
 
-    public boolean hasNext() {
+    public synchronized boolean hasNext() {
         queueLock.lock();
         try {
             return size > 0;
