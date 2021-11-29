@@ -68,6 +68,7 @@ public class BatchQueueList<T> extends AbstractQueue<T> implements BatchQueue<T>
         }
     }
 
+    @Override
     public void forEach(Consumer<? super T> action) {
         T result;
         while (size > 0) {
@@ -131,6 +132,7 @@ public class BatchQueueList<T> extends AbstractQueue<T> implements BatchQueue<T>
         clearComplete();
     }
 
+    @Override
     public Spliterator<T> spliterator() {
         if(batchQueueItemSelectionBehaviour == BatchQueueItemSelectionBehaviour.ITEM_SELECT_DESC)
             itemIndex = batchItems.size() - 1;
@@ -138,10 +140,12 @@ public class BatchQueueList<T> extends AbstractQueue<T> implements BatchQueue<T>
         return Spliterators.spliterator(this.iterator(), size(), 0);
     }
 
+    @Override
     public Stream<T> stream() {
         return StreamSupport.stream(spliterator(), false);
     }
 
+    @Override
     public Stream<T> parallelStream() {
         return StreamSupport.stream(spliterator(), true);
     }
