@@ -12,6 +12,7 @@
 [![codecov](https://codecov.io/gh/rkonovalov/comparator/branch/master/graph/badge.svg)](https://codecov.io/gh/rkonovalov/comparator)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ea8708461ffb49108013aa0f5ec09ede)](https://www.codacy.com/app/rkonovalov/comparator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rkonovalov/comparator&amp;utm_campaign=Badge_Grade)
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=comparator&metric=alert_status)](https://sonarcloud.io/dashboard?id=comparator)
+[![Java CI with Maven](https://github.com/rkonovalov/comparator/actions/workflows/maven.yml/badge.svg)](https://github.com/rkonovalov/comparator/actions/workflows/maven.yml)
 
 # About Comparator
 Most of all languages has conditional statements. And Java is not exception.
