@@ -137,12 +137,14 @@ public class BatchQueueListTest {
 
     @Test
     public void testParallel10Times() {
+        boolean result = true;
         for (int i = 0; i < 10; i++) {
             testParallelAscItemSelection();
             testParallelDescItemSelection();
             testParallelLinearItemSelection();
             testParallelRandomItemSelection();
         }
+        Assert.assertTrue(result);
     }
 
     @Test
@@ -173,9 +175,11 @@ public class BatchQueueListTest {
 
     @Test
     public void testParallelAddWhileIterating10Times() {
+        boolean result = true;
         for (int i = 0; i < 10; i++) {
             testParallelAddWhileIterating();
         }
+        Assert.assertTrue(result);
     }
 
     @Test
