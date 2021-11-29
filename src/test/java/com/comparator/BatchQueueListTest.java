@@ -168,7 +168,7 @@ public class BatchQueueListTest {
     }
 
     @Test
-    public void testParallelRandomItemSelectionForEach() {
+    public void testRandomItemSelectionForEach() {
         batchQueueList = new BatchQueueList<>(BatchQueueItemSelectionBehaviour.ITEM_SELECT_RANDOM);
         insertMocInitialBatches(batchQueueList);
 
@@ -260,7 +260,7 @@ public class BatchQueueListTest {
         batchQueueList = new BatchQueueList<>(BatchQueueItemSelectionBehaviour.ITEM_SELECT_RANDOM);
         insertMocInitialBatches(batchQueueList);
 
-        Assert.assertFalse(batchQueueList.clear());
+        Assert.assertFalse(batchQueueList.clearComplete());
     }
 
     @Test
@@ -270,7 +270,7 @@ public class BatchQueueListTest {
 
         AtomicInteger value = new AtomicInteger(0);
         batchQueueList.forEach(value::set);
-        Assert.assertTrue(batchQueueList.clear());
+        Assert.assertTrue(batchQueueList.clearComplete());
     }
 
 
