@@ -2,6 +2,7 @@ package com.comparator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BatchQueueListItem<T> implements BatchQueueItem<T> {
@@ -23,10 +24,13 @@ public class BatchQueueListItem<T> implements BatchQueueItem<T> {
         return itemIndex < items.size();
     }
 
-    //Need to make thread safe
+
     @Override
     public T next() {
-        return hasNext() ? items.get(itemIndex++) : null;
+        if(hasNext()) {
+            return items.get(itemIndex++);
+        } else
+            throw new NoSuchElementException();
     }
 
     @Override
