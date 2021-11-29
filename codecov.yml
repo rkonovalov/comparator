@@ -1,8 +1,2 @@
-- name: Upload reports to codecov
-    env:
-      CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
-    run: |
-      curl -Os https://uploader.codecov.io/latest/linux/codecov
-      find . -iregex "codecov.*"
-      chmod +x codecov
-      ./codecov -t ${CODECOV_TOKEN}
+github:
+  webhook_secret: "secret:v1::Sl+pxN0rWXNzdNKN0y0TI7Jfj0A2xe8TSLFLSbwCk8LRYp9dhsoyNEaVcGxtrNB8"
